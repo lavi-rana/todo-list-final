@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>🌸 My Todo App 🌸</title>
+
+    <link rel="stylesheet" href="style1.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="image-box">
+        <img src="img.jpg.jpeg" alt="Todo Image" class="todo-img">
+    </div>
+
+    <h1>🌸 My Todo App 🌸</h1>
+
+    <div class="input-box">
+
+        <input
+        type="text"
+        id="taskInput"
+        placeholder="✨ Enter your task...">
+
+        <button id="addBtn">➕ Add</button>
+
+    </div>
+
+    <p id="error"></p>
+
+    <ul id="taskList"></ul>
+
+    <h3>🧸 Total Tasks : <span id="count">0</span></h3>
+
+</div>
+
+<script>
+
+let taskInput = document.getElementById("taskInput");
+let addBtn = document.getElementById("addBtn");
+let taskList = document.getElementById("taskList");
+let count = document.getElementById("count");
+let error = document.getElementById("error");
+
+let total = 0;
+
+addBtn.addEventListener("click", function(){
+
+    let task = taskInput.value.trim();
+
+    if(task === ""){
+        error.innerText = "⚠️ Please enter a task!";
+        return;
+    }
+
+    error.innerText = "";
+
+    let li = document.createElement("li");
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+
+    let span = document.createElement("span");
+    span.innerText = task;
+
+    checkbox.addEventListener("change", function(){
+        span.classList.toggle("completed");
+    });
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "🗑️";
+
+    deleteBtn.addEventListener("click", function(){
+        li.remove();
+        total--;
+        count.innerText = total;
+    });
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+
+    taskList.appendChild(li);
+
+    total++;
+    count.innerText = total;
+
+    taskInput.value = "";
+
+});
+
+</script>
+
+</body>
+</html>
